@@ -159,6 +159,9 @@ function crypto(a_string, a_number) {
             if (index2+a_number >= 26) { //Detecte si la lettre a crypter va aller au délà de l'alphabet
                 messager=alphabet.charAt((index2+a_number)-26) //On revient au debut de l'alphabat quand on arrive au bout
             }
+            else if(index2+a_number < 0){ //Pareil mais iverser pour pouvoir décryter avec une clé négative
+                messager=alphabet.charAt((index2+a_number)+26)
+            }
 
             else{messager=alphabet.charAt(index2+a_number)} //Sinon ça va
             
@@ -168,6 +171,12 @@ function crypto(a_string, a_number) {
     }
     memoire=memoire+messager //Metting de la plus haute importance
    }
+   console.log(memoire)
    return memoire
 }
 
+////////PARTIE 9/////////
+
+function decrypt(a_string, a_number) {
+    return crypto(a_string, -a_number)
+}
