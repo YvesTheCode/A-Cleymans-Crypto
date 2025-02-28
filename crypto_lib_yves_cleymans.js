@@ -104,17 +104,40 @@ function remove(string_of_words, caracter){
         return 0
     }
 
-    let memoire = ""
+    let memoire = "" //C'est lui qui va retenir notre chaine de caractère modifié
     for (let index = 0; index < string_of_words.length; index++) {
         
-        if (string_of_words.charAt(index)===caracter) {
-            memoire = memoire+""
-        }
-        else{
+        if (string_of_words.charAt(index)!=caracter) { //Si la lettre actuel est pas la même que celle banni on l'ajoute sinon il se passe rien
             memoire = memoire+string_of_words.charAt(index)
         }
-        
   
+    }
+    return memoire
+}
+
+////////PARTIE 7/////////
+
+function remove_strings(string_of_words, caracter){
+
+    if (string_of_words === undefined) { //Prévention si paramètre indéfinies
+        return 0
+    }
+
+    let memoire = "" //C'est lui qui va encore retenir notre chaine de caractère modifié
+    for (let index = 0; index < string_of_words.length; index++) {
+        let nuhuh = false
+
+        for (let index2 = 0; index2 < caracter.length; index2++) {
+            
+            if (string_of_words.charAt(index)===caracter.charAt(index2)) { //Si la lettre actuel est pas la même que celle banni on l'ajoute sinon il se passe rien
+                nuhuh = true
+            }
+          
+        }
+        if(nuhuh!=true){
+            memoire = memoire+string_of_words.charAt(index)
+        }
+
     }
     return memoire
 }
