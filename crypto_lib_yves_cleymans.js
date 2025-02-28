@@ -107,7 +107,7 @@ function remove(string_of_words, caracter){
     let memoire = "" //C'est lui qui va retenir notre chaine de caractère modifié
     for (let index = 0; index < string_of_words.length; index++) {
         
-        if (string_of_words.charAt(index)!=caracter) { //Si la lettre actuel est pas la même que celle banni on l'ajoute sinon il se passe rien
+        if (string_of_words.charAt(index)!=caracter) { //Si la lettre actuel n'est pas la même que celle banni on l'ajoute sinon il se passe rien
             memoire = memoire+string_of_words.charAt(index)
         }
   
@@ -123,21 +123,51 @@ function remove_strings(string_of_words, caracter){
         return 0
     }
 
-    let memoire = "" //C'est lui qui va encore retenir notre chaine de caractère modifié
+    let memoire = "" //C'est lui qui va encore retenir notre chaine de caractère modifié mais cette fois si sous la supervision d'un juge
     for (let index = 0; index < string_of_words.length; index++) {
-        let nuhuh = false
+        let nuhuh = false //Juge si une lettre va finir pouvoir être garder par mémoire
 
         for (let index2 = 0; index2 < caracter.length; index2++) {
             
-            if (string_of_words.charAt(index)===caracter.charAt(index2)) { //Si la lettre actuel est pas la même que celle banni on l'ajoute sinon il se passe rien
+            if (string_of_words.charAt(index)===caracter.charAt(index2)) { //Si la lettre actuel est banni le juge se réveil
                 nuhuh = true
             }
           
         }
-        if(nuhuh!=true){
+        if(nuhuh!=true){ //Si le juge est n'est pas réveillé on peut continuer tranquillement
             memoire = memoire+string_of_words.charAt(index)
         }
 
     }
     return memoire
 }
+
+////////PARTIE 8/////////
+
+let alphabet = 'abcdefghijklmnopqrstuvwxyz'; //Ici c'est mieux, pour moi
+let alphabet_upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+function crypto(a_string, a_number) {
+    let memoire = "" //C'est lui qui va retenir notre chaine de caractère crypté
+    a_number = a_number % 26 //Pour ééviter qu'il dépasse 26
+   for (let index = 0; index < a_string.length; index++) {
+    let messager = a_string.charAt(index) //Il va apporter nos lettre crypté à memoire
+    for (let index2 = 0; index2 < alphabet.length; index2++) {
+        
+        if (a_string.charAt(index)===alphabet.charAt(index2)) { //Pour éviter supprimer les espaces ou autre caractère spéciaux
+
+            if (index2+a_number >= 26) { //Detecte si la lettre a crypter va aller au délà de l'alphabet
+                messager=alphabet.charAt((index2+a_number)-26) //On revient au debut de l'alphabat quand on arrive au bout
+            }
+
+            else{messager=alphabet.charAt(index2+a_number)} //Sinon ça va
+            
+
+        }
+        
+    }
+    memoire=memoire+messager //Metting de la plus haute importance
+   }
+   return memoire
+}
+
