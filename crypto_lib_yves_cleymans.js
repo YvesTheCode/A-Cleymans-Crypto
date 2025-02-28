@@ -152,6 +152,8 @@ function crypto(a_string, a_number) {
     a_number = a_number % 26 //Pour ééviter qu'il dépasse 26
    for (let index = 0; index < a_string.length; index++) {
     let messager = a_string.charAt(index) //Il va apporter nos lettre crypté à memoire
+
+    //Boucle pour check si c'est une minuscule
     for (let index2 = 0; index2 < alphabet.length; index2++) {
         
         if (a_string.charAt(index)===alphabet.charAt(index2)) { //Pour éviter supprimer les espaces ou autre caractère spéciaux
@@ -169,9 +171,25 @@ function crypto(a_string, a_number) {
         }
         
     }
+
+    //Pareil mais pour les majuscules
+    for (let index3 = 0; index3 < alphabet_upper.length; index3++) { 
+        if (a_string.charAt(index)===alphabet_upper.charAt(index3)) { //Pour éviter supprimer les espaces ou autre caractère spéciaux
+
+            if (index3+a_number >= 26) { //Detecte si la lettre a crypter va aller au délà de l'alphabet
+                messager=alphabet_upper.charAt((index3+a_number)-26) //On revient au debut de l'alphabat quand on arrive au bout
+            }
+            else if(index3+a_number < 0){ //Pareil mais iverser pour pouvoir décryter avec une clé négative
+                messager=alphabet_upper.charAt((index3+a_number)+26)
+            }
+
+            else{messager=alphabet_upper.charAt(index3+a_number)} //Sinon ça va
+            
+
+        }
+    }
     memoire=memoire+messager //Metting de la plus haute importance
    }
-   console.log(memoire)
    return memoire
 }
 
@@ -179,4 +197,12 @@ function crypto(a_string, a_number) {
 
 function decrypt(a_string, a_number) {
     return crypto(a_string, -a_number)
+}
+
+////////PARTIE 10/////////
+
+function enigma(crypted_string){
+    for (let index = 0; index < 26; index++) {
+        console.log("Clef "+index+": "+crypto(crypted_string,index))
+    }
 }
