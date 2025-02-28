@@ -93,6 +93,28 @@ function count_consonants(string_of_words) {
     if (string_of_words === undefined) { //Prévention si paramètre indéfinies
         string_of_words = ""
     }
+    return string_of_words.length - count_vowels(string_of_words) - count_words(string_of_words) + 1 //Longueur de la chaine - le voyelle - les espaces - 1 = consonnes
+}
 
-    return string_of_words.length - count_vowels(string_of_words) - count_words(string_of_words) + 1
+////////PARTIE 6/////////
+
+function remove(string_of_words, caracter){
+
+    if (string_of_words === undefined) { //Prévention si paramètre indéfinies
+        return 0
+    }
+
+    let memoire = ""
+    for (let index = 0; index < string_of_words.length; index++) {
+        
+        if (string_of_words.charAt(index)===caracter) {
+            memoire = memoire+""
+        }
+        else{
+            memoire = memoire+string_of_words.charAt(index)
+        }
+        
+  
+    }
+    return memoire
 }
