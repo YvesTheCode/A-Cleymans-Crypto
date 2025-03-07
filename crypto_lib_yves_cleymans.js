@@ -14,18 +14,29 @@ function what_are_words_worth() {
 
 ////////PARTIE 2/////////
 
-function count_words(string_of_words) {
+function count_words(string_of_words) { //Cette version ne compte plus seulement les espaces mais bien les mots (plus besoin de faire +1 à la fin)
 
-    let count = 0 //Compteur d'espace
+    let count = 0 //Compteur de mot
+    let mememot = false //Il sait si on est toujours dans un même mots où le suivant
+
+    if (string_of_words === undefined ) { //Prévention si paramètre indéfinies
+        return 0
+    }
 
     for (let index = 0; index < string_of_words.length; index++) { //Boucle aussi longue que la chaine de caractères
 
-        if (string_of_words.charAt(index) === " ") {
-            ++count
+        if (string_of_words.charAt(index) !== " ") {
+            if (!mememot) {
+                ++count
+                mememot = true
+            }
+        }
+        else{
+            mememot = false
         }
 
     }
-    return count + 1 //On part du principe que ya un mot avant le première espace
+    return count //On part du principe que ya un mot avant le première espace
 }
 
 ////////PARTIE 3/////////
@@ -35,7 +46,7 @@ function count_words_by(string_of_words, letter) {
     let count = 0 //Compteur de lettre proffesionnel, demi-frère du compteur d'espace
 
     if (string_of_words === undefined) { //Prévention si paramètre indéfinies
-        string_of_words = 0
+        return 0
     }
 
     for (let index = 0; index < string_of_words.length; index++) { //Boucle aussi longue que la chaine de caractères, non j'ai pas copié-collé
@@ -89,11 +100,11 @@ function count_vowels(string_of_words) {
 
 ////////PARTIE 5/////////
 
-function count_consonants(string_of_words) {
+function count_consonants(string_of_words) { //Avec les changement de la partie 2 j'ai du changer celle-ci pour en utilisant la partie 3 pour compter les espaces
     if (string_of_words === undefined) { //Prévention si paramètre indéfinies
-        string_of_words = ""
+        return 0
     }
-    return string_of_words.length - count_vowels(string_of_words) - count_words(string_of_words) + 1 //Longueur de la chaine - le voyelle - les espaces - 1 = consonnes
+    return string_of_words.length - count_vowels(string_of_words) - count_words_by(string_of_words," ") + 1 //Longueur de la chaine - le voyelle - les espaces - 1 = consonnes
 }
 
 ////////PARTIE 6/////////
@@ -149,7 +160,7 @@ let alphabet_upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 function crypto(a_string, a_number) {
     let memoire = "" //C'est lui qui va retenir notre chaine de caractère crypté
-    a_number = a_number % 26 //Pour ééviter qu'il dépasse 26
+    a_number = a_number % 26 //Pour éviter qu'il dépasse 26 car un cryptage César de 27 est égal a un cryptage de 1
    for (let index = 0; index < a_string.length; index++) {
     let messager = a_string.charAt(index) //Il va apporter nos lettre crypté à memoire
 
@@ -196,13 +207,13 @@ function crypto(a_string, a_number) {
 ////////PARTIE 9/////////
 
 function decrypt(a_string, a_number) {
-    return crypto(a_string, -a_number)
+    return crypto(a_string, -a_number) //Un nombre negatif dans la fonction crypto permet de faire l'inverse ducoup
 }
 
 ////////PARTIE 10/////////
 
 function enigma(crypted_string){
-    for (let index = 0; index < 26; index++) {
-        console.log("Clef "+index+": "+crypto(crypted_string,index))
+    for (let index = 1; index < 26; index++) { //La boucle va créer les 25 possiblités de variantes du code César
+        console.log("Clef "+index+": "+crypto(crypted_string,index)) //On utilise crypto pour générer chaque décryptage possible
     }
 }
