@@ -25,13 +25,13 @@ function count_words(string_of_words) { //Cette version ne compte plus seulement
 
     for (let index = 0; index < string_of_words.length; index++) { //Boucle aussi longue que la chaine de caractères
 
-        if (string_of_words.charAt(index) !== " ") {
-            if (!mememot) {
+        if (string_of_words.charAt(index) !== " ") { //Si le caractère n'est pas un espace
+            if (!mememot) { //Si c'est pas le même mots
                 ++count
                 mememot = true
             }
         }
-        else{
+        else{ //Sinon c'est le même mots
             mememot = false
         }
 
@@ -90,7 +90,7 @@ function count_vowels(string_of_words) {
 
 
 
-        if (is_a_vowel(letter) === true) {
+        if (is_a_vowel(letter) === true) { //Si c'est une voyelle
             ++count
         }
 
@@ -119,7 +119,7 @@ function remove(string_of_words, caracter){
     for (let index = 0; index < string_of_words.length; index++) {
         
         if (string_of_words.charAt(index)!=caracter) { //Si la lettre actuel n'est pas la même que celle banni on l'ajoute sinon il se passe rien
-            memoire = memoire+string_of_words.charAt(index)
+            memoire = memoire+string_of_words.charAt(index) //On ajoute notre lettre pas banni a notre chaine
         }
   
     }
